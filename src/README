@@ -1,0 +1,1 @@
+./split_def ../files/aes_core.def ../Results/aes_core_M1.def 1 | tee log
