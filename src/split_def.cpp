@@ -784,7 +784,7 @@ void create_graph(std::vector<metal_pair> metal_lines, std::vector<pin_pair> pin
 
     else{//otherwise, new net name
         //std::cout << lastline.first+"_"+std::to_string(count) << std::endl;
-        out << lastline.first+"_"+std::to_string(count) << std::endl;
+        out << lastline.first+"_split_"+std::to_string(count) << std::endl;
     }
     
     //print the PIN name
