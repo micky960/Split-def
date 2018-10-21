@@ -218,7 +218,7 @@ int main(int argc, char* argv[]){
     std::cout << "start splitting"<<std::endl;
     omp_init_lock(&writelock);
     //#pragma omp target
-    #pragma omp parallel for schedule(dynamic)
+    //#pragma omp parallel for schedule(dynamic)
 	for(unsigned i=1; i<netlist.size(); i++){
 	    //std::cout<<"#NET "<<i<<std::endl;
 	    std::cout<<"NET "<<netlist[i].first<<std::endl;
@@ -641,7 +641,7 @@ void create_graph(std::vector<metal_pair> metal_lines, std::vector<pin_pair> pin
 
     std::unordered_map<std::string, vertex_t> umap;
 	for(unsigned j=0; j<pinpinlist.size(); j++){
-	    //std::cout<<"NAME: "<<pinpinlist[j].first<<std::endl;
+	    std::cout<<"NAME: "<<pinpinlist[j].first<< " " << pinpinlist[j].second << std::endl;
 		for(unsigned i=0; i<v_size; i++){
 	        //associate IO pins with vertex
 			if(pinpinlist[j].first.find("PIN")!=-1){
@@ -650,7 +650,7 @@ void create_graph(std::vector<metal_pair> metal_lines, std::vector<pin_pair> pin
     			PIN	temp = pinlist[pinpinlist[j].first+" "+pinpinlist[j].second];
                 //std::cout <<"PIN: "<<temp.name<<"X,Y:"<<temp.x<<","<<temp.y<<std::endl;
 				vertex_t u = vertex(i, g);
-				if(temp.x == g[u].x && temp.y == g[u].y && temp.layer == g[u].layer){
+				if(temp.x == g[u].x && temp.y == g[u].y && temp.layer == g[u].layer && temp.layer <= split){
                     //std::cout << "MATCH PIN"<<std::endl;
 		            vertex_t p = boost::add_vertex(g);
 					g[p].name = "PIN "+temp.name;
